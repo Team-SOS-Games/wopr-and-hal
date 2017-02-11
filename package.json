@@ -1,7 +1,7 @@
 {
   "name": "wopr-and-hal",
   "version": "0.0.1",
-  "description": "WOPR and HAL - A Cooperative Async Turn Based RPG",
+  "description": "WOPR and HAL - A social onine party game",
   "main": "./bin/www",
   "private": true,
   "scripts": {
