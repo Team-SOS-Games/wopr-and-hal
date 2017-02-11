@@ -17,7 +17,6 @@
   },
   "description": "WOPR and HAL - A Cooperative Async Turn Based RPG",
   "main": "./bin/www",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Team-SOS-Games/wopr-and-hal.git"
