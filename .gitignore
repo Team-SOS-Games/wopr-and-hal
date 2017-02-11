@@ -1,3 +1,18 @@
-keys.js
+.DS_STORE
+.vscode
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Dependency directory
+# https://docs.npmjs.com/cli/shrinkwrap#caveats
 node_modules
-.DS_Store
+
+# Debug log from npm
+npm-debug.log
