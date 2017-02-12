@@ -1,11 +1,11 @@
 {
   "name": "wopr-and-hal",
   "version": "0.0.1",
-  "description": "WOPR and HAL - A social onine party game",
-  "main": "./bin/www",
+  "description": "WOPR and HAL - A turn based multiplayer game",
+  "main": "server.js",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "^1.16.0",
@@ -18,7 +18,8 @@
     "serve-favicon": "^2.3.2",
     "mysql": "^2.13.0",
     "sequelize": "^3.30.2",
-    "sequelize-cli": "^2.5.1"
+    "sequelize-cli": "^2.5.1",
+    "socket.io": "^1.7.2"
   },
     "engines": {
     "node": "6.9.1"

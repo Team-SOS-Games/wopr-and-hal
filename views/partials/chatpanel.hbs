@@ -1,14 +1,15 @@
+{{!-- partial for displaying side-bar and chat panel --}}
 <div class="nav-wrapper"> 
-    <a class="brand-logo">Logo</a>
+    <a class="brand-logo">Game Room</a>
     <ul id="slide-out" class="side-nav fixed">
         <li>
             <div>
-                <div class="chat_posts">
+                <div id="chat_posts">
                     {{#posts}}
                     {{/posts}}
                 </div>
-                <form class="chat_form col m12">
-                    <input class="col m12" name="message" id="message" type="text">
+                <form id="chat_form" class="col m12">
+                    <input class="col m12" name="chat_message" id="chat_message" type="text">
                     <input id="chat_send" type="submit" value="Send">
                 </form>
             </div>
