@@ -1,8 +1,17 @@
 {{>chatpanel}}
 
 <div class="row game_panel">
-    <div class="col m12"> Game Panel </div>
+
+    <div class="col m12"> <!-- Game Panel --> <img class="img-responsive center_block" src='{{scene.bgImg}}' alt="rock paper scissors" style="padding-top: 5px"> </div>
+
 </div>
-<div class="row  choice_panel">
-    <div class="col m12"> Choices </div>
+
+<div class="row choice_panel">
+
+    <div class="col m12"> Choices 
+    {{#each scene.choices}}
+  		<button>{{this}}</button>
+  	{{/each}}
+  </div>
+
 </div>
