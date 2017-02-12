@@ -14,8 +14,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'WOPR and HAL' });
 });
 
-router.get('/gameroom', function(req, res, next) {
-	// console.log(game_object.scenes);
+router.get('/lobby', function(req, res, next) {
+  res.render('lobby', {title: 'Game lobby'});
+});
+
+router.get('/gameroom/:id', function(req, res, next) {
   res.render('gameroom', { title: 'Game Room', scene: game_object.scenes[0]});
 });
 
