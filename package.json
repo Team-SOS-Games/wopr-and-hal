@@ -7,7 +7,21 @@
   "scripts": {
     "start": "node server.js"
   },
-  "engines": {
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.1",
+    "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
+    "hbs": "~4.0.1",
+    "morgan": "^1.8.1",
+    "serve-favicon": "^2.3.2",
+    "mysql": "^2.13.0",
+    "sequelize": "^3.30.2",
+    "sequelize-cli": "^2.5.1",
+    "socket.io": "^1.7.2"
+  },
+    "engines": {
     "node": "6.9.1"
   },
   "repository": {
@@ -28,16 +42,5 @@
   "bugs": {
     "url": "https://github.com/Team-SOS-Games/wopr-and-hal/issues"
   },
-  "homepage": "https://github.com/Team-SOS-Games/wopr-and-hal#readme",
-  "dependencies": {
-    "body-parser": "^1.16.0",
-    "cookie-parser": "^1.4.3",
-    "debug": "^2.6.1",
-    "express": "^4.14.1",
-    "express-handlebars": "^3.0.0",
-    "hbs": "~4.0.1",
-    "morgan": "^1.8.1",
-    "serve-favicon": "^2.3.2",
-    "socket.io": "^1.7.2"
-  }
+  "homepage": "https://github.com/Team-SOS-Games/wopr-and-hal#readme"
 }
