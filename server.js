@@ -1,5 +1,6 @@
 //jshint esversion:6
 const express = require('express');
+const debug = require('debug')('wopr-and-hal:server');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
@@ -8,6 +9,7 @@ const bodyParser = require('body-parser');
 const hbs = require('express-handlebars');
 const router = require('./routes/htmlRoute');
 const api = require('./routes/apiRoute');
+var io;
 
 const app = express();
 
@@ -15,6 +17,12 @@ const app = express();
 app.engine('hbs', hbs({ defaultLayout: 'main', partialsDir: [__dirname + '/views/partials'],
 extname: 'hbs'}));
 app.set('view engine', 'hbs');
+app.set('port', process.env.PORT || 8080);
+
+//assign same port to Socket.io from express
+io = require('socket.io')(app.listen(app.get('port'), function () {
+  console.log("connected on http://localhost:%s", app.get('port'));
+}));
 
 // uncomment after placing favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -26,6 +34,14 @@ app.use(express.static('public'));
 
 app.use('/', router);
 app.use('/api', api);
+
+//TODO move to new chat route
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,5 +59,3 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500).render('error');
 });
-
-module.exports = app;
