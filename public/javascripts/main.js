@@ -1,20 +1,38 @@
 $(document).ready(function () {
+    var socket = io.connect('http://localhost:8080');
+    var $chat = $('#chat_posts');
+    var $postForm = $('#chat_form');
+    var $post = $('#chat_message');
+
     // Initialize collapse sidebar
     $(".button-collapse").sideNav({
         menuWidth: 300,
         edge: 'right',
     });
 
-    $('#chat_send').on('click', function (e) {
+    $postForm.submit(function (e) {
         e.preventDefault();
 
-        $('#textbox').val('');
-        console.log("clicked");
+        var message = $post.val();
+
+        $.post("/chat", function(){
+            socket.emit('post', message, function (data) {
+                console.log(data);
+            });
+        });
+        
+
+        $post.val('');
     });
 
-    var socket = io.connect('http://localhost:8080');
-    socket.on('news', function (data) {
+    socket.on('new post', function (data) {
+        console.log(data);
+        $chat.append('<p>'+ data.msg +'</p>');
+    })
+
+    socket.on('news',function (data) {
         console.log(data);
         socket.emit('my other event', { my: 'data' });
     });
+    
 });

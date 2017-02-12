@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const hbs = require('express-handlebars');
 const router = require('./routes/htmlRoute');
 const api = require('./routes/apiRoute');
+const chat = require('./routes/chatRoute');
 var io;
 
 const app = express();
@@ -34,14 +35,7 @@ app.use(express.static('public'));
 
 app.use('/', router);
 app.use('/api', api);
-
-//TODO move to new chat route
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
+app.use('/chat', chat(io));//note route is passed io here
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
