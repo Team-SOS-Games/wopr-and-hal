@@ -2,6 +2,9 @@
 const express = require('express');
 const router = express.Router();
 
+// import the game_object that holds scenes and data
+const game_object = require('../game_object.js')
+
 /**
  * This router handles the websites HTML routing, redirecting
  * and rendering.
@@ -16,7 +19,7 @@ router.get('/lobby', function(req, res, next) {
 });
 
 router.get('/gameroom/:id', function(req, res, next) {
-  res.render('gameroom', { title: 'Game Room'});
+  res.render('gameroom', { title: 'Game Room', scene: game_object.scenes[0]});
 });
 
 module.exports = router;
