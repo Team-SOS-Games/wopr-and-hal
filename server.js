@@ -1,18 +1,16 @@
 //jshint esversion:6
 const express = require('express');
-const debug = require('debug')('wopr-and-hal:server');
+const debug = require('debug')('wopr-and-hal:server');//used when in node debug mode
 const path = require('path');
 const favicon = require('serve-favicon');
-const logger = require('morgan');
+const logger = require('morgan');//used to log all request
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const hbs = require('express-handlebars');
 const router = require('./routes/htmlRoute');
 const api = require('./routes/apiRoute');
-const chat = require('./routes/chatRoute');
-var io;
-
 const app = express();
+var io;
 
 // view engine setup
 app.engine('hbs', hbs({ defaultLayout: 'main', partialsDir: [__dirname + '/views/partials'],
@@ -25,6 +23,13 @@ io = require('socket.io')(app.listen(app.get('port'), function () {
   console.log("connected on http://localhost:%s", app.get('port'));
 }));
 
+//create two namespaces for two instances of socket listeners
+var ioChat = io.of('/chat');
+var ioGame = io.of('/game');
+
+//pass io to chat route after its been assigned a port
+var chat = require('./routes/chatRoute')(ioChat);
+
 // uncomment after placing favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev')); //TODO change to combined when deployed
@@ -35,7 +40,7 @@ app.use(express.static('public'));
 
 app.use('/', router);
 app.use('/api', api);
-app.use('/chat', chat(io));//note route is passed io here
+app.use('/chat', chat);//note route is passed with io here
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

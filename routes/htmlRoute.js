@@ -11,7 +11,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'WOPR and HAL' });
 });
 
-router.get('/gameroom', function(req, res, next) {
+router.get('/lobby', function(req, res, next) {
+  res.render('lobby', {title: 'Game lobby'});
+});
+
+router.get('/gameroom/:id', function(req, res, next) {
   res.render('gameroom', { title: 'Game Room'});
 });
 
