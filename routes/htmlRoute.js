@@ -11,4 +11,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'WOPR and HAL' });
 });
 
+router.get('/gameroom', function(req, res, next) {
+  res.render('gameroom', { title: 'Game Room'});
+});
+
 module.exports = router;

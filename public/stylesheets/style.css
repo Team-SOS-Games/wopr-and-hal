@@ -1,8 +1,28 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html, body {
+  height: 100%;
 }
 
-a {
-  color: #00B7FF;
+header, main, footer {
+  padding-left: 300px;
+}
+
+.game_panel, .game_panel div {
+  width: 100%;
+  height: 50%;
+}
+
+.choice_panel, .choice_panel div {
+  width: 100%;
+  height: 50%;
+}
+
+.side-nav li form {
+  position: fixed;
+  bottom: 10%;
+}
+
+@media only screen and (max-width: 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
 }

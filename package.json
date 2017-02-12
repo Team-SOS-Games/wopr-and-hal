@@ -1,10 +1,13 @@
 {
   "name": "wopr-and-hal",
   "version": "0.0.1",
+  "description": "WOPR and HAL - A social onine party game",
+  "main": "./bin/www",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
+<<<<<<< HEAD
   "dependencies": {
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
@@ -17,10 +20,11 @@
     "sequelize": "^3.30.2",
     "sequelize-cli": "^2.5.1",
     "serve-favicon": "^2.3.0"
+=======
+  "engines": {
+    "node": "6.9.1"
+>>>>>>> 05dc0d241dbcfa003678acd73f5a53de24c4210c
   },
-  "description": "WOPR and HAL - A Cooperative Async Turn Based RPG",
-  "main": "./bin/www",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Team-SOS-Games/wopr-and-hal.git"
@@ -39,5 +43,15 @@
   "bugs": {
     "url": "https://github.com/Team-SOS-Games/wopr-and-hal/issues"
   },
-  "homepage": "https://github.com/Team-SOS-Games/wopr-and-hal#readme"
+  "homepage": "https://github.com/Team-SOS-Games/wopr-and-hal#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.1",
+    "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
+    "hbs": "~4.0.1",
+    "morgan": "^1.8.1",
+    "serve-favicon": "^2.3.2"
+  }
 }
