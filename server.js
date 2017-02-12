@@ -12,7 +12,8 @@ const api = require('./routes/apiRoute');
 const app = express();
 
 // view engine setup
-app.engine('hbs', hbs({ defaultLayout: 'main'}));
+app.engine('hbs', hbs({ defaultLayout: 'main', partialsDir: [__dirname + '/views/partials'],
+extname: 'hbs'}));
 app.set('view engine', 'hbs');
 
 // uncomment after placing favicon in /public
