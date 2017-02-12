@@ -14,13 +14,10 @@ $(document).ready(function () {
         e.preventDefault();
 
         var message = $post.val();
-
-        $.post("/chat", function(){
-            socket.emit('post', message, function (data) {
-                console.log(data);
-            });
-        });
         
+        socket.emit('post', message, function (data) {
+            console.log(data);
+        });
 
         $post.val('');
     });
@@ -30,9 +27,9 @@ $(document).ready(function () {
         $chat.append('<p>'+ data.msg +'</p>');
     })
 
-    socket.on('news',function (data) {
+    socket.on('testing',function (data) {
         console.log(data);
-        socket.emit('my other event', { my: 'data' });
+        socket.emit('test', { my: 'data' });
     });
     
 });
