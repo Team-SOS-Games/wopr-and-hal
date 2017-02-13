@@ -18,13 +18,12 @@ router.post('/', function(req,res,next) {
 
 router.post('/adduser', function(req, res, next) {
 	console.log("username: ", req.body.userName);
-	db.user.create(req.body.userName, function(error) {
-		if (error) {
-			console.log("Please enter a valid user name!");
-		}
-
+	db.user.create({userName: req.body.userName}).then(function() {
+		res.sendStatus(200);
 		// add this after /createroom is made
 		// res.redirect('/createroom');
+	}).catch(function (err) {
+		console.error(err.msg);
 	});
 });
 

@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       unique:true,
       validate:{
-        isEmpty: false,
+        notEmpty: true,
         min:1
       }
     }
@@ -22,7 +22,9 @@ module.exports = function(sequelize, DataTypes) {
     timestamps:false
   });
 
-  User.sync();
+  User.sync({
+    logging: console.log
+  });
   
   return User;
 
