@@ -22,6 +22,8 @@ module.exports = function(sequelize, DataTypes) {
     timestamps:false
   });
 
+  User.sync();
+  
   return User;
 
 };
