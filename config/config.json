@@ -1,22 +1,22 @@
 {
   "development": {
     "username": "root",
-    "password": "8725183sd",
-    "database": "database_development",
+    "password": null,
+    "database": "halwopr",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "halwopr",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": null,
-    "database": "database_production",
+    "database": "halwopr",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

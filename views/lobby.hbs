@@ -2,7 +2,13 @@
     <div class="row valign-wrapper">
         <div class="valign center-align">
             <h1 class="valign center-align">Welcome to the Lobby</h1>
-        <button id="lobby_button">start a game</button>
+        <!-- <button id="lobby_button">start a game</button> -->
+        	
+        	<form action="/api/adduser" method="POST">
+				<input type="text" class="form-control" name="userName" value="" id="enter_text">
+				<button type="submit" class="btn btn-primary" id="text-enter-button">Start a Game!</button>
+			</form>
+
         </div>
     </div>
 </div>

@@ -2,22 +2,23 @@
 module.exports = function(sequelize, DataTypes) {
   var leaderboards = sequelize.define('leaderboards', {
     id: {
-      type:DataTypes.INTERGER,
+      type:DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement:true
     },
     userID:{
-      type:DataTypes.INTERGER,
+      // userID is the foreign key from users table primary key
+      type:DataTypes.INTEGER,
       unique:true
     },
     wins:{
-      type:DataTypes.INTERGER,
+      type:DataTypes.INTEGER,
     },
     loses:{
-      type:DataTypes.INTERGER
+      type:DataTypes.INTEGER
     },
     gamesplayed:{
-      type:DataTypes.INTERGER,
+      type:DataTypes.INTEGER,
     }
   },{
     timestamps:false
