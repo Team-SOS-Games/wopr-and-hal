@@ -18,6 +18,12 @@ router.get('/lobby', function(req, res, next) {
   res.render('lobby', {title: 'Game lobby'});
 });
 
+router.get('/createroom', function(req, res, next) {
+  var roomID = Math.floor(Math.random() * (2 - 0) + 0);
+
+  res.redirect('/gameroom/'+ roomID);
+});
+
 router.get('/gameroom/:id', function(req, res, next) {
   res.render('gameroom', { title: 'Game Room', scene: game_object.scenes[0]});
 });
