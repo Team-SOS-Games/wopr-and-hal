@@ -3,7 +3,7 @@ html, body {
 }
 
 header, main, footer {
-  padding-left: 300px;
+  padding-right: 300px;
 }
 
 .game_panel, .game_panel div {

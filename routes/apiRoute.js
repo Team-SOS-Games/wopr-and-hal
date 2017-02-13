@@ -19,11 +19,14 @@ router.post('/', function(req,res,next) {
 router.post('/adduser', function(req, res, next) {
 	console.log("username: ", req.body.userName);
 	db.user.create({userName: req.body.userName}).then(function() {
-		res.sendStatus(200);
-		// add this after /createroom is made
-		// res.redirect('/createroom');
+
+		//add this after /createroom is made
+		res.redirect('/createroom');
+
 	}).catch(function (err) {
-		console.error(err.msg);
+		
+		res.redirect('/lobby');
+		console.error(err.errors[0].message);
 	});
 });
 

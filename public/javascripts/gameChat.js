@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
     //grab gameroom number from url on load
-    var id = Number(window.location.pathname.match(/\/gameroom\/(\d+)$/)[1]);
+    var roomID = Number(window.location.pathname.match(/\/gameroom\/(\d+)$/)[1]);
 
-    console.log(id);
+    console.log(roomID);
     
     //reference socket io via chat namespace set on server
     var socket = io.connect('/chat');
@@ -18,10 +18,12 @@ $(document).ready(function () {
 
         var message = $message.val();
 
-        //post route test
+        //post route test (can be used to add post to DB)
         $.post('/chat', function (result) {
             console.log(result);
-        }); //send message to io listener on server
+        });
+
+        //send message to io listener on server
         socket.emit('post', message, function (data) {
             console.log(data);
         });
@@ -36,9 +38,9 @@ $(document).ready(function () {
     });
 
     //runs when user connects to page
-    socket.on('testing', function (data) {
+    socket.on('load', function (data) {
         console.log(data);
-        socket.emit('test', { my: 'data' });
+        socket.emit('load', roomID);
     });
 
 });//end of ready
