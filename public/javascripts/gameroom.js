@@ -1,4 +1,10 @@
 $(document).ready(function () {
+
+    //grab gameroom number from url on load
+    var id = Number(window.location.pathname.match(/\/gameroom\/(\d+)$/)[1]);
+
+    console.log(id);
+    
     //reference socket io via chat namespace set on server
     var socket = io.connect('/chat');
     //caching chat components for multiple use 
