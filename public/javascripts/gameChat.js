@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    // get the user name from session storage
+    var sessionUserName = sessionStorage.sessionUserName;
+
     //grab gameroom number from url on load
     var roomID = Number(window.location.pathname.match(/\/gameroom\/(\d+)$/)[1]);
 
@@ -34,6 +37,7 @@ $(document).ready(function () {
         //message obj to hold chat post data
         var message = {
             roomID: roomID,
+            userName: sessionUserName,
             msg: $message.val().trim()
         };
 
@@ -53,7 +57,7 @@ $(document).ready(function () {
     //renders user posts from server to chat panel
     chatIO.on('new post', function (data) {
         console.log(data);
-        $chat.append('<li>' + data.msg + '</li>');
+        $chat.append('<li>' + '<strong>' + data.userName + ': ' + '</strong>' + data.msg + '</li>');
     });
 
 });//end of ready
