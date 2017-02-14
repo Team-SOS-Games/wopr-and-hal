@@ -18,7 +18,7 @@ router.post('/', function(req,res,next) {
 
 router.post('/adduser', function(req, res, next) {
 	console.log("username: ", req.body.userName);
-	db.user.create({userName: req.body.userName}).then(function() {
+	db.user.findOrCreate({where: {userName: req.body.userName}}).then(function() {
 
 		//add this after /createroom is made
 		res.redirect('/createroom');
