@@ -49,7 +49,7 @@ var chatRouter = function(io) {
         socket.on('post', function (data) {
             console.log(data);
             //sends post back to users by roomID
-            io.to(data.roomID).emit('new post', { msg: data.msg });
+            io.to(data.roomID).emit('new post', { msg: data.msg , userName: data.userName});
         });
     });
 
