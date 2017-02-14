@@ -3,6 +3,12 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+div.image:before {
+   content:url(http://previews.123rf.com/images/kristijanzontar/kristijanzontar0911/kristijanzontar091100003/5880799-Young-people-laughing-and-pointing-at-the-computer-screen-Stock-Photo.jpg);
+   
+   padding: 50px;
+   length: 10px;
+   width: 10px;
 a {
   color: #00B7FF;
 }
