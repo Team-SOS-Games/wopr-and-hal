@@ -27,8 +27,10 @@ io = require('socket.io')(app.listen(app.get('port'), function () {
 var ioChat = io.of('/chat');
 var ioGame = io.of('/game');
 
-//pass io to chat route after its been assigned a port
+//pass io to chat and game route after its been assigned a port
+//and namespaces
 var chat = require('./routes/chatRoute')(ioChat);
+var game = require('./routes/gameRoute')(ioGame);
 
 // uncomment after placing favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -40,7 +42,8 @@ app.use(express.static('public'));
 
 app.use('/', router);
 app.use('/api', api);
-app.use('/chat', chat);//note route is passed with io here
+app.use('/chat', chat);//note route is passed with /chat io namespace here
+app.use('/game', game);//note route is passed with /game io namespace here
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
