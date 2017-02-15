@@ -8,6 +8,13 @@ var game_object = {
 			bgImg: "https://i.ytimg.com/vi/UYxpX3N20qU/maxresdefault.jpg",
 			dialogText: "Choose wisely. Your life may depend on it!",
 			choices: ["rock", "paper", "scissors"]
+		}, // end of scene # 0
+
+		{	
+			scene: 1, 
+			bgImg: "https://i.ytimg.com/vi/UYxpX3N20qU/maxresdefault.jpg",
+			dialogText: "Choose again! Your life still depends on it!",
+			choices: ["scissors", "rock", "paper"]
 		} // end of scene # 0
 
 	] // end of scenes array
