@@ -9,9 +9,9 @@ $(document).ready(function() {
     var gameIO = io.connect('/game');
 
     //cache choice buttons for multiple use
-    $rock = $('#rock');
-    $paper = $('#paper');
-    $scissors = $('#scissors');
+    var $choice0 = $('#0');
+    var $choice1 = $('#1');
+    var $choice2 = $('#2');
 
     /**
      * Socket.io custom "on" event listener
@@ -32,7 +32,7 @@ $(document).ready(function() {
      * from server is sent back
      */
     //send rock as choice
-    $rock.on('click', function() {
+    $choice0.on('click', function() {
         var self = $(this).attr('id');
         
         gameIO.emit('choice', self, function(data) {
@@ -41,7 +41,7 @@ $(document).ready(function() {
     });
 
     //send paper as choice
-    $paper.on('click', function () {
+    $choice1.on('click', function () {
         var self = $(this).attr('id');
 
         gameIO.emit('choice', self, function (data) {
@@ -50,7 +50,7 @@ $(document).ready(function() {
     });
 
     //send scissors as choice
-    $scissors.on('click', function () {
+    $choice2.on('click', function () {
         var self = $(this).attr('id');
 
         gameIO.emit('choice', self, function (data) {
