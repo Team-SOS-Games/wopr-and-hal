@@ -1,5 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
+    // get the user name from session storage
+    var sessionUserName = sessionStorage.sessionUserName;
     //gram gameroom number from url on load
     var roomID = Number(window.location.pathname.match(/\/gameroom\/(\d+)$/)[1]);
 
@@ -23,7 +25,7 @@ $(document).ready(function() {
     */
     gameIO.on('load', function (data) {
         console.log(data);
-        gameIO.emit('load', roomID);
+        gameIO.emit('load', { roomID: roomID, userName: sessionUserName });
     });
 
     /**
@@ -34,8 +36,8 @@ $(document).ready(function() {
     //send rock as choice
     $choice0.on('click', function() {
         var self = $(this).attr('id');
-        
-        gameIO.emit('choice', self, function(data) {
+
+        gameIO.emit('choice', self, function (data) {
             //console.log(data);
         });
     });
@@ -59,7 +61,7 @@ $(document).ready(function() {
     });
 
     //listens for return data after choice events are fired
-    gameIO.on('choice', function(data){
+    gameIO.on('choice', function (data) {
         console.log(data);
     });
 });
