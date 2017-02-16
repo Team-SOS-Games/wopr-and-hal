@@ -21,8 +21,10 @@ router.get('/lobby', function(req, res, next) {
 
 router.get('/leaderboards', function(req, res, next) {
 	db.leaderboards.findAll({
+		// order by games played
+		order: [['gamesplayed', 'DESC']]
 	}).then(function(leaderboardsObject) {
-		res.render('leaderboards', leaderboardsObject);
+		res.render('leaderboards', {leaderboards: leaderboardsObject});
 	});
 });
 

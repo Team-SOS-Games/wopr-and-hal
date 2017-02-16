@@ -8,9 +8,9 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true
     },
 
-    userID: {
-      // userID is the foreign key from users table primary key
-      type: DataTypes.INTEGER,
+    userName: {
+      // userName is the foreign key from users table userName
+      type: DataTypes.STRING,
       unique: true
     },
 
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
     },
 
-    loses:{
+    losses:{
       type: DataTypes.INTEGER
     },
 
@@ -36,5 +36,10 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+
+  leaderboards.sync({
+    logging: console.logging
+  });
+
   return leaderboards;
 };
