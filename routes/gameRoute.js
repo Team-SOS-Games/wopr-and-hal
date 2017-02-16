@@ -49,8 +49,6 @@ var gameRouter = function (io) {
         */
         socket.on('load', function (data) {
 
-            console.log("gameroom id: " + data.roomID);
-
             var roomID = data.roomID;
 
             //if room doesn't exist create and add it to list
@@ -62,8 +60,6 @@ var gameRouter = function (io) {
                 setUpUserSocket(socket, data);
 
                 addFirstUser(data);
-
-               //console.log(gamesList);
 
                 //TODO emit to user waiting for other player
                 socket.emit('waiting', { waiting: "waiting for player 2 to join" });
