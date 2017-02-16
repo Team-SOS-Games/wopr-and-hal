@@ -74,7 +74,7 @@ $(document).ready(function () {
     gameIO.on('player left', function (data) {
         console.log(data.msg);
         if (data.redirect) {
-            setTimeout(function () { window.location.href = data.url }, 3000);
+            setTimeout(function () { window.location.href = data.url; }, 3000);
         }
     });
 });
