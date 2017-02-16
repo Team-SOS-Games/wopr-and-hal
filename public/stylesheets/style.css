@@ -12,6 +12,7 @@ header, main, footer {
   background-repeat:no-repeat;
   background-size:cover;
   background-position:left;
+  background-image: url('');
 }
 
 .choice_panel, .choice_panel div {
