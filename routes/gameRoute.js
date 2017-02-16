@@ -41,17 +41,20 @@ var gameRouter = function (io) {
         socket.emit('load', { game: 'hello from game' });
 
         /**
-        * listens for user when they connect,
-        * then adds user to a room via socket property
+        * listens for user when they load page,
+        * Creates a game and adds it to Gameslist if it doesn't already exist
+        * when a user joins a room already in list they are added as second player
+        * if a room already has 2 players they redireted back to lobby page to find another game
         * @params(Int: data) room id from client
         */
         socket.on('load', function (data) {
+
             console.log("gameroom id: " + data.roomID);
 
             var roomID = data.roomID;
 
             //if room doesn't exist create and add it to list
-            if (gamesList.length == 0 || typeof (gamesList[roomID]) == 'undefined') {
+            if (gamesList.length === 0 || typeof (gamesList[roomID]) == 'undefined') {
 
                 console.log("setting up user for first time in room");
 
@@ -74,18 +77,7 @@ var gameRouter = function (io) {
 
                 setUpUserSocket(socket, data);
 
-                var User2 = {
-                    turn: true,
-                    choice: null,
-                    userName: socket.userName || "voldermort"
-                };//end of user2
-
-                //User2 to current active game
-                gamesList[roomID].User2 = User2;
-
-                //increase number of users in room
-                gamesList[roomID].numOfUsers++;
-
+                addSecondUser(socket);
                 //console.log(gamesList);
 
                 //emit user 2 has joined game
@@ -103,7 +95,6 @@ var gameRouter = function (io) {
         /**
          * Listens for users click events
          * sends data back to all users
-         * TODO needs to send back to same room only, pass room id from client inside
          * @params(String: data) id of element clicked by user
          */
         socket.on('choice', function (data) {
@@ -148,6 +139,20 @@ function addFirstUser(data) {
         newGame.numOfUsers,
         newGame.scene
     );
+}
+
+function addSecondUser(socket) {
+    var User2 = {
+        turn: true,
+        choice: null,
+        userName: socket.userName || "voldermort"
+    };//end of user2
+
+    //User2 to current active game
+    gamesList[socket.room].User2 = User2;
+
+    //increase number of users in room
+    gamesList[socket.room].numOfUsers++;
 }
 
 module.exports = gameRouter;
