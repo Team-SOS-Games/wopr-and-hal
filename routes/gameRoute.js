@@ -78,7 +78,7 @@ var gameRouter = function (io) {
                 setUpUserSocket(socket, data);
 
                 addSecondUser(socket);
-                console.log(gamesList);
+                //console.log(gamesList);
 
                 //emit user 2 has joined game
                 socket.emit('waiting', { waiting: "player two has joined" });
@@ -90,6 +90,7 @@ var gameRouter = function (io) {
                 socket.emit('redirect', { redirect: true, url: "/lobby" });
             }
 
+            console.log(gamesList);
         });
 
         /**
@@ -106,6 +107,14 @@ var gameRouter = function (io) {
         socket.on('disconnect', function() {
             var message = "player has left the game";
 
+            var aCurrentUser = typeof(gamesList[socket.room]);
+            console.log(aCurrentUser);
+            
+            if (aCurrentUser !== 'undefined') {
+                gamesList.splice(socket.room, 1);
+            }
+
+            console.log(gamesList);
             console.log(message);
             io.to(socket.room).emit('player left', { msg: message, redirect: true, url: "/lobby" });
         });
