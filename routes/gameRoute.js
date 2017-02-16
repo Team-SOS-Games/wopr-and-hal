@@ -44,22 +44,25 @@ var gameRouter = function (io) {
         * listens for user when they load page,
         * Creates a game and adds it to Gameslist if it doesn't already exist
         * when a user joins a room already in list they are added as second player
-        * if a room already has 2 players they redireted back to lobby page to find another game
+        * if a room already has 2 players they are redireted back to lobby page to find another game
         * @params(Int: data) room id from client
         */
         socket.on('load', function (data) {
 
             var roomID = data.roomID;
 
-            console.log(gamesList["room: " + roomID]);
-
-            console.log(gamesList["room: " + roomID] == 'undefined');
-
             //if room doesn't exist create and add it to list
             if (typeof (gamesList["room: " + roomID]) == 'undefined') {
 
                 console.log(gamesList.length === 0 || gamesList["room: " + roomID] == 'undefined');
                 console.log("setting up user for first time in room");
+
+                console.log(data.userName);
+                if(data.userName === undefined) {
+                    data.userName = "voldermort1";
+                    console.log(data.userName);
+                    
+                }
 
                 //setup room and name data for current socket
                 setUpUserSocket(socket, data);
@@ -76,6 +79,10 @@ var gameRouter = function (io) {
             else if (gamesList["room: " + roomID].numOfUsers == 1) {
 
                 console.log("setting up user two for the first time");
+
+                if (data.userName === undefined) {
+                    data.userName = "voldermort2";
+                }
 
                 setUpUserSocket(socket, data);
 
@@ -102,7 +109,18 @@ var gameRouter = function (io) {
          */
         socket.on('choice', function (data) {
 
-            storeUsersChoice(socket, data);
+            var user1 = gamesList["room: " + socket.room].User1;
+            var user2 = gamesList["room: " + socket.room].User2;
+
+            storeUsersChoice(user1, user2, socket, data);
+
+            if (user1.choice !== null && user2.choice !== null) {
+
+                console.log("both players choices made");
+                
+                user1.choice = null;
+                user2.choice = null;
+            }
 
             console.log(data);
             io.to(socket.room).emit('choice', { choice: data });
@@ -113,10 +131,11 @@ var gameRouter = function (io) {
             var message = "player has left the game";
             console.log(message);
 
-            console.log(gamesList[0]);
-
+            //check if room number exists in gamelists
             for (var key in gamesList) {
                 console.log(key);
+
+                //if room key matches current users room remove game from list
                 if (key == "room: " + socket.room) {
                     console.log("match");
 
@@ -141,13 +160,13 @@ function setUpUserSocket(user, data) {
     user.join(user.room);
 }
 
-function addFirstUser(data) {
+function addFirstUser(socket) {
     var newGame = {
-        roomID: data.roomID,
+        roomID: socket.roomID,
         User1: {
             turn: true,
-            choice: 0,
-            userName: data.userName || "Voldermort1",
+            choice: null,
+            userName: socket.userName,
         },
         User2: {
             turn: true,
@@ -159,7 +178,7 @@ function addFirstUser(data) {
     };//end of newGame setup object
 
     //TODO call constuctor on gameslist adding new game
-    gamesList["room: " + data.roomID] = new Game(
+    gamesList["room: " + socket.roomID] = new Game(
         newGame.roomID,
         newGame.User1,
         newGame.User2,
@@ -172,7 +191,7 @@ function addSecondUser(socket) {
     var User2 = {
         turn: true,
         choice: null,
-        userName: socket.userName || "voldermort2"
+        userName: socket.userName
     };//end of user2
 
     //User2 to current active game
@@ -182,13 +201,10 @@ function addSecondUser(socket) {
     gamesList["room: " + socket.room].numOfUsers++;
 }
 
-function storeUsersChoice(socket, choice) {
-
-    var user1 = gamesList["room: " + socket.room].User1;
-    var user2 = gamesList["room: " + socket.room].User2;
+function storeUsersChoice(user1, user2, currentUser, choice) {
 
     //check if current socke is User1 if not assign choice to User2
-    if (user1.userName == socket.userName) {
+    if (user1.userName == currentUser.userName) {
 
         user1.choice = parseInt(choice);
 
@@ -198,7 +214,8 @@ function storeUsersChoice(socket, choice) {
 
     }
 
-    console.log("user 1: %s user 2: %d", user1.choice, user2.choice);
+    console.log("user "+ user1.userName + ": %s user " + 
+    user2.userName +": %d", user1.choice, user2.choice);
 
 }
 
