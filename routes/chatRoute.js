@@ -54,7 +54,7 @@ var chatRouter = function (io) {
         socket.on('post', function (data) {
             console.log(data);
             //sends post back to users by roomID
-            io.to(data.roomID).emit('new post', { msg: data.msg, userName: data.userName });
+            io.to(data.roomID).emit('new post', { msg: data.msg.replace(/<script>|<\/script>/g, ''), userName: data.userName });
         });
     });
 

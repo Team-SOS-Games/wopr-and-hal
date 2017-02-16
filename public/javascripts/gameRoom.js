@@ -64,4 +64,10 @@ $(document).ready(function () {
     gameIO.on('choice', function (data) {
         console.log(data);
     });
+
+    gameIO.on('redirect', function(data) {
+        if(data.redirect) {
+            window.location.href = data.url;
+        }
+    });
 });
