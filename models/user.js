@@ -19,7 +19,6 @@ module.exports = function(sequelize, DataTypes) {
 
     password: {
       type: DataTypes.STRING,
-      unique: true,
       validate: {
         notEmpty: true,
         min: 1
