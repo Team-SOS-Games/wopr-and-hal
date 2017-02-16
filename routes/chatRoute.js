@@ -34,10 +34,8 @@ var chatRouter = function (io) {
          * @params(Int: data) room id from client
         */
         socket.on('load', function (data) {
-            console.log(io.adapter.rooms[data]);
-            
-                socket.join(data);
-            
+            //console.log(io.adapter.rooms[data]); 
+            socket.join(data);
         });
 
         //log the users connected to chat socket
