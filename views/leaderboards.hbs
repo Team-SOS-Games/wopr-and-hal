@@ -5,19 +5,19 @@
 	<thead>
 		<tr>
 			<th data-field="id">Name</th>
-			<th data-field="name">Games Played</th>
 			<th data-field="name">Wins</th>
 			<th data-field="name">Losses</th>
+			<th data-field="name">Games Played</th>
 		</tr>
 	</thead>
 
 	<tbody>
 	{{#each leaderboards}}
 		<tr>
-			<td>{{this.userName}}</td>
-			<td>{{this.gamesplayed}}</td>
+			<td>{{this.userName}}</td>			
 			<td>{{this.wins}}</td>
 			<td>{{this.losses}}</td>
+			<td>{{this.gamesplayed}}</td>
 		</tr>
 	{{/each}}
 	</tbody>
