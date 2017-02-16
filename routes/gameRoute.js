@@ -77,7 +77,7 @@ var gameRouter = function (io) {
                 var User2 = {
                     turn: true,
                     choice: null,
-                    userName: socket.userName || "voldermort" + roomID
+                    userName: socket.userName || "voldermort"
                 };//end of user2
 
                 //User2 to current active game
@@ -86,7 +86,7 @@ var gameRouter = function (io) {
                 //increase number of users in room
                 gamesList[roomID].numOfUsers++;
 
-                //console.log(gameslist);
+                //console.log(gamesList);
 
                 //emit user 2 has joined game
                 socket.emit('waiting', { waiting: "player two has joined" });

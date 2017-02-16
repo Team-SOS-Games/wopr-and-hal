@@ -1,7 +1,12 @@
 $(document).ready(function () {
 
     // get the user name from session storage
-    var sessionUserName = sessionStorage.sessionUserName;
+    var sessionUserName;
+    if (sessionStorage.sessionUserName === undefined) {
+        sessionUserName = "voldermort";
+    } else {
+        sessionUserName = sessionStorage.sessionUserName;
+    }
 
     //grab gameroom number from url on load
     var roomID = Number(window.location.pathname.match(/\/gameroom\/(\d+)$/)[1]);
