@@ -18,6 +18,10 @@ router.get('/lobby', function(req, res, next) {
   res.render('lobby', {title: 'Game lobby'});
 });
 
+router.get('/leaderboard', function(req, res, next) {
+	res.render('leaderboard', {title: 'Leaderboard'});
+});
+
 router.get('/createroom', function(req, res, next) {
   var roomID = Math.floor(Math.random() * (2 - 0) + 0);
 
