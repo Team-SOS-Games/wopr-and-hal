@@ -1,3 +1,6 @@
+// This is the actual deployed game object
+// When using, move to /game_object.js
+
 // define object for rock/paper/scissors for now
 // array of scenes, bgImg, dialong text, choices
 
