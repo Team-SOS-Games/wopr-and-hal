@@ -34,7 +34,7 @@ $(document).ready(function () {
      * from server is sent back
      */
     //send rock as choice
-    $choice0.on('click', function() {
+    $choice0.on('click', function () {
         var self = $(this).attr('id');
 
         gameIO.emit('choice', self, function (data) {
@@ -65,9 +65,16 @@ $(document).ready(function () {
         console.log(data);
     });
 
-    gameIO.on('redirect', function(data) {
-        if(data.redirect) {
+    gameIO.on('redirect', function (data) {
+        if (data.redirect) {
             window.location.href = data.url;
+        }
+    });
+
+    gameIO.on('player left', function (data) {
+        console.log(data.msg);
+        if (data.redirect) {
+            setTimeout(function () { window.location.href = data.url }, 3000);
         }
     });
 });

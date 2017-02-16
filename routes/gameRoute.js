@@ -63,7 +63,7 @@ var gameRouter = function (io) {
 
                 addFirstUser(data);
 
-                console.log(gamesList);
+               //console.log(gamesList);
 
                 //TODO emit to user waiting for other player
                 socket.emit('waiting', { waiting: "waiting for player 2 to join" });
@@ -78,7 +78,7 @@ var gameRouter = function (io) {
                 setUpUserSocket(socket, data);
 
                 addSecondUser(socket);
-                //console.log(gamesList);
+                console.log(gamesList);
 
                 //emit user 2 has joined game
                 socket.emit('waiting', { waiting: "player two has joined" });
@@ -101,6 +101,14 @@ var gameRouter = function (io) {
             console.log(data);
             io.to(socket.room).emit('choice', { choice: data });
         });
+
+        //listens for disconnect of user
+        socket.on('disconnect', function() {
+            var message = "player has left the game";
+
+            console.log(message);
+            io.to(socket.room).emit('player left', { msg: message, redirect: true, url: "/lobby" });
+        });
     });
 
     //return router so it can be exported
@@ -120,7 +128,7 @@ function addFirstUser(data) {
         User1: {
             turn: true,
             choice: 0,
-            userName: data.userName,
+            userName: data.userName || "Voldermort1",
         },
         User2: {
             turn: true,
