@@ -2,6 +2,16 @@ var express = require('express');
 var router = express.Router();
 var gamesList = [];
 
+// Game constructor
+function Game (roomID, User1, User2, numOfUsers, scene) {
+    this.roomID = roomID;
+    this.User1 = User1;
+    this.User2 = User2;
+    this.numOfUsers = numOfUsers;
+    this.scene = scene;
+}
+
+
 //@params(Obj: io) passed in from server.js
 var gameRouter = function (io) {
 

@@ -8,12 +8,21 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
 
-    userName:{
+    userName: {
       type: DataTypes.STRING,
-      unique:true,
+      unique: true,
       validate:{
         notEmpty: true,
-        min:1
+        min: 1
+      }
+    },
+
+    password: {
+      type: DataTypes.STRING,
+      unique: true,
+      validate: {
+        notEmpty: true,
+        min: 1
       }
     }
   },
