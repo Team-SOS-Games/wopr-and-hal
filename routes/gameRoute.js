@@ -51,9 +51,14 @@ var gameRouter = function (io) {
 
             var roomID = data.roomID;
 
-            //if room doesn't exist create and add it to list
-            if (gamesList.length === 0 || typeof (gamesList[roomID]) == 'undefined') {
+            console.log(gamesList["room: " + roomID]);
 
+            console.log(gamesList["room: " + roomID] == 'undefined');
+
+            //if room doesn't exist create and add it to list
+            if (typeof (gamesList["room: " + roomID]) == 'undefined') {
+
+                console.log(gamesList.length === 0 || gamesList["room: " + roomID] == 'undefined');
                 console.log("setting up user for first time in room");
 
                 //setup room and name data for current socket
@@ -64,26 +69,27 @@ var gameRouter = function (io) {
                 //TODO emit to user waiting for other player
                 socket.emit('waiting', { waiting: "waiting for player 2 to join" });
 
-                // console.log(gamesList[roomID].numOfUsers);
+                console.log(gamesList["room: " + roomID].numOfUsers);
 
                 //if only one user is in current room    
-            } else if (gamesList[roomID].numOfUsers == 1) {
+            }
+            else if (gamesList["room: " + roomID].numOfUsers == 1) {
 
                 console.log("setting up user two for the first time");
 
                 setUpUserSocket(socket, data);
 
                 addSecondUser(socket);
-                //console.log(gamesList);
 
                 //emit user 2 has joined game
                 socket.emit('waiting', { waiting: "player two has joined" });
 
-            } else {
-                //console.log("none selected");
+            }
+            else {
 
                 //tell user room is full and redirect to lobby via front-end
                 socket.emit('redirect', { redirect: true, url: "/lobby" });
+
             }
 
             console.log(gamesList);
@@ -95,24 +101,32 @@ var gameRouter = function (io) {
          * @params(String: data) id of element clicked by user
          */
         socket.on('choice', function (data) {
+
+            storeUsersChoice(socket, data);
+
             console.log(data);
             io.to(socket.room).emit('choice', { choice: data });
         });
 
         //listens for disconnect of user
-        socket.on('disconnect', function() {
+        socket.on('disconnect', function () {
             var message = "player has left the game";
+            console.log(message);
 
-            var aCurrentUser = typeof(gamesList[socket.room]);
-            console.log(aCurrentUser);
-            
-            if (aCurrentUser !== 'undefined') {
-                gamesList.splice(socket.room, 1);
+            console.log(gamesList[0]);
+
+            for (var key in gamesList) {
+                console.log(key);
+                if (key == "room: " + socket.room) {
+                    console.log("match");
+
+                    delete gamesList[key];
+
+                    io.to(socket.room).emit('player left', { msg: message, redirect: true, url: "/lobby" });
+                }
             }
 
             console.log(gamesList);
-            console.log(message);
-            io.to(socket.room).emit('player left', { msg: message, redirect: true, url: "/lobby" });
         });
     });
 
@@ -138,14 +152,14 @@ function addFirstUser(data) {
         User2: {
             turn: true,
             choice: null,
-            userName: "Voldermort"
+            userName: null
         },
         numOfUsers: 1,
         scene: 0
     };//end of newGame setup object
 
     //TODO call constuctor on gameslist adding new game
-    gamesList[data.roomID] = new Game(
+    gamesList["room: " + data.roomID] = new Game(
         newGame.roomID,
         newGame.User1,
         newGame.User2,
@@ -158,14 +172,34 @@ function addSecondUser(socket) {
     var User2 = {
         turn: true,
         choice: null,
-        userName: socket.userName || "voldermort"
+        userName: socket.userName || "voldermort2"
     };//end of user2
 
     //User2 to current active game
-    gamesList[socket.room].User2 = User2;
+    gamesList["room: " + socket.room].User2 = User2;
 
     //increase number of users in room
-    gamesList[socket.room].numOfUsers++;
+    gamesList["room: " + socket.room].numOfUsers++;
+}
+
+function storeUsersChoice(socket, choice) {
+
+    var user1 = gamesList["room: " + socket.room].User1;
+    var user2 = gamesList["room: " + socket.room].User2;
+
+    //check if current socke is User1 if not assign choice to User2
+    if (user1.userName == socket.userName) {
+
+        user1.choice = parseInt(choice);
+
+    } else {
+
+        user2.choice = parseInt(choice);
+
+    }
+
+    console.log("user 1: %s user 2: %d", user1.choice, user2.choice);
+
 }
 
 module.exports = gameRouter;
