@@ -1,6 +1,7 @@
 //jshint esversion:6
 const express = require('express');
 const router = express.Router();
+const db = require('../models/index.js');
 
 // import the game_object that holds scenes and data
 const game_object = require('../game_object.js')
@@ -18,8 +19,11 @@ router.get('/lobby', function(req, res, next) {
   res.render('lobby', {title: 'Game lobby'});
 });
 
-router.get('/leaderboard', function(req, res, next) {
-	res.render('leaderboard', {title: 'Leaderboard'});
+router.get('/leaderboards', function(req, res, next) {
+	db.leaderboards.findAll({
+	}).then(function(leaderboardsObject) {
+		res.render('leaderboards', leaderboardsObject);
+	});
 });
 
 router.get('/createroom', function(req, res, next) {
