@@ -10,6 +10,9 @@ $(document).ready(function () {
     //reference socket io via game namespace set on server
     var gameIO = io.connect('/game');
 
+    //cache game panel elements for multiple use
+    var $bg  = $('#scene_bg');
+    var $dialog = $('#dialog');
     //cache choice buttons for multiple use
     var $choice0 = $('#0');
     var $choice1 = $('#1');
@@ -18,10 +21,10 @@ $(document).ready(function () {
     /**
      * Socket.io custom "on" event listener
      * runs when user connects to page
-     * @params(string: load) our name for event
-     * @params(obj: data) returns whatever emit('load')
+     * @param(string: load) our name for event
+     * @param(obj: data) returns whatever emit('load')
      * passes ex.{game: 'hello from game' }
-     * @params(emit(Int: roomID)) sends to add user to room
+     * @param(emit(Int: roomID)) sends to add user to room
     */
     gameIO.on('load', function (data) {
         console.log(data);
@@ -37,32 +40,36 @@ $(document).ready(function () {
     $choice0.on('click', function () {
         var self = $(this).attr('id');
 
-        gameIO.emit('choice', self, function (data) {
-            //console.log(data);
-        });
+        gameIO.emit('choice', self);
     });
 
     //send paper as choice
     $choice1.on('click', function () {
         var self = $(this).attr('id');
 
-        gameIO.emit('choice', self, function (data) {
-            //console.log(data);
-        });
+        gameIO.emit('choice', self);
     });
 
     //send scissors as choice
     $choice2.on('click', function () {
         var self = $(this).attr('id');
 
-        gameIO.emit('choice', self, function (data) {
-            //console.log(data);
-        });
+        gameIO.emit('choice', self);
     });
 
     //listens for return data after choice events are fired
     gameIO.on('choice', function (data) {
         console.log(data);
+    });
+
+    gameIO.on('next', function (data) {
+        console.log(data);
+        
+        $bg.css("background-image", data.bgImg);
+        $dialog.text(data.dialogText);
+        $choice0.text(data.choices[0]);
+        $choice1.text(data.choices[1]);
+        $choice2.text(data.choices[2]);
     });
 
     gameIO.on('redirect', function (data) {

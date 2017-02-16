@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var gameData = require('../gameObjects/RPS_game_object');
 
 //list of all games currently active on server
 var gamesList = [];
@@ -32,8 +33,8 @@ var gameRouter = function (io) {
     * when user connects to a page with a io namespace of /game
     * this will run automatically. All events sent to and from the client
     * is done inside the connection
-    * @params(String: connection) built in event from socket.io
-    * @params(Obj: socket) this is the client obj created by socket.io
+    * @param(String: connection) built in event from socket.io
+    * @param(Obj: socket) this is the client obj created by socket.io
    */
     io.on('connection', function (socket) {
 
@@ -45,7 +46,7 @@ var gameRouter = function (io) {
         * Creates a game and adds it to Gameslist if it doesn't already exist
         * when a user joins a room already in list they are added as second player
         * if a room already has 2 players they are redireted back to lobby page to find another game
-        * @params(Int: data) room id from client
+        * @param(Int: data) room id from client
         */
         socket.on('load', function (data) {
 
@@ -58,10 +59,10 @@ var gameRouter = function (io) {
                 console.log("setting up user for first time in room");
 
                 console.log(data.userName);
-                if(data.userName === undefined) {
+                if (data.userName === undefined) {
                     data.userName = "voldermort1";
                     console.log(data.userName);
-                    
+
                 }
 
                 //setup room and name data for current socket
@@ -104,22 +105,46 @@ var gameRouter = function (io) {
 
         /**
          * Listens for users click events
-         * sends data back to all users
-         * @params(String: data) id of element clicked by user
+         * stores them in current game returns the winning choice
+         * @param(String: data) id of element clicked by user
          */
         socket.on('choice', function (data) {
 
-            var user1 = gamesList["room: " + socket.room].User1;
-            var user2 = gamesList["room: " + socket.room].User2;
+            var currentGame = gamesList["room: " + socket.room];
+            console.log("current game is");
+
+            console.log(currentGame);
+
+            var user1 = currentGame.User1;
+            var user2 = currentGame.User2;
 
             storeUsersChoice(user1, user2, socket, data);
 
             if (user1.choice !== null && user2.choice !== null) {
 
                 console.log("both players choices made");
-                
+
+                /**
+                 * randomly chooses winning decision
+                 * returns an Obj that contains
+                 * @return{obj}{userName, choice}
+                 */
+                var winningChoice = getWinningChoice(user1, user2);
+
+                //get results of choice and update game scene
+                var nextScene = getNextScene(currentGame);
+
+                //reset user choices after current game state
                 user1.choice = null;
                 user2.choice = null;
+
+                if (nextScene !== "gameover") {
+                    //update users scenery
+                    io.to(socket.room).emit('next', nextScene);
+                } else {
+                    //tell show final result
+                    io.to(socket.room).emit('gameover', {gameover: true});
+                }
             }
 
             console.log(data);
@@ -214,9 +239,38 @@ function storeUsersChoice(user1, user2, currentUser, choice) {
 
     }
 
-    console.log("user "+ user1.userName + ": %s user " + 
-    user2.userName +": %d", user1.choice, user2.choice);
+    console.log("user " + user1.userName + ": %s user " +
+        user2.userName + ": %d", user1.choice, user2.choice);
 
+}
+
+function getWinningChoice(user1, user2) {
+    var winner = Math.floor(Math.random() * (2 - 0) + 0);
+
+    var winningPlayer = [user1.userName, user2.userName];
+    var winningChoice = [user1.choice, user2.choice];
+    var theWinner = { userName: winningPlayer[winner], choice: winningChoice[winner] };
+
+    console.log(theWinner);
+
+    return theWinner;
+}
+
+function getNextScene(currentGame) {
+
+    if (currentGame.scene + 1 < gameData.scenes.length) {
+
+        currentGame.scene++;
+
+    } else {
+        nextScene = "gameover";
+    }
+
+    var nextScene = gameData.scenes[currentGame.scene];
+
+    console.log(gameData);
+
+    return nextScene;
 }
 
 module.exports = gameRouter;
