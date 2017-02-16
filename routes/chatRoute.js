@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var chatList;
 
 //@params(Obj: io) passed in from server.js
 var chatRouter = function (io) {
@@ -33,7 +34,10 @@ var chatRouter = function (io) {
          * @params(Int: data) room id from client
         */
         socket.on('load', function (data) {
-            socket.join(data);
+            console.log(io.adapter.rooms[data]);
+            
+                socket.join(data);
+            
         });
 
         //log the users connected to chat socket
