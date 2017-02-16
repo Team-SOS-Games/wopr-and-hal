@@ -1,0 +1,24 @@
+
+<h1 class="center-align">Leaderboards</h1>
+
+<table class="striped centered responsive-table">
+	<thead>
+		<tr>
+			<th data-field="id">Name</th>
+			<th data-field="name">Games Played</th>
+			<th data-field="name">Wins</th>
+			<th data-field="name">Losses</th>
+		</tr>
+	</thead>
+
+	<tbody>
+	{{#each leaderboards}}
+		<tr>
+			<td>{{this.userName}}</td>
+			<td>{{this.gamesplayed}}</td>
+			<td>{{this.wins}}</td>
+			<td>{{this.losses}}</td>
+		</tr>
+	{{/each}}
+	</tbody>
+</table>
