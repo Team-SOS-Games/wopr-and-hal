@@ -142,10 +142,10 @@ var gameRouter = function (io) {
                 user1.choice = null;
                 user2.choice = null;
                 
-                if (nextScene !== "gameover") {
-                    //update users scenery
-                    io.to(socket.room).emit('next', nextScene);
-                } else {
+                //update users scenery
+                io.to(socket.room).emit('next', nextScene);
+
+                if (nextScene == "gameover") {
                     //show final result
                     io.to(socket.room).emit('gameover', {gameover: true});
                 }
