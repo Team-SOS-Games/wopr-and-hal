@@ -94,7 +94,7 @@ $(document).ready(function () {
 
         $('.player-choices').hide();
 
-        setTimeout(displayGameOver, 4000);
+        setTimeout(displayGameOver, 5500);
     });
 
     gameIO.on('redirect', function (data) {
