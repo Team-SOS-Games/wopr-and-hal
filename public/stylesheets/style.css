@@ -40,3 +40,12 @@ header, main, footer {
   overflow: hidden;
   overflow-y: auto;
 }
+
+#dialogdiv {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: auto;
+}
+
+#dialogtext {
+  color: white;
+}

@@ -27,8 +27,8 @@ var game_object = {
 		{	
 			scene: 2,
 			bgImg: "https://media.giphy.com/media/3o85xEkfikjZScMyKk/giphy.gif",
-			dialogText: "You finally reack the mountain peak but find an ogre asleep beside the fountain of youth. You try to tiptoe over but the ogre awakens and demands you give him a give or be eaten. What do you do?",
-			choices: ["Realize ogres just wants to fit in and give him your shades", "Throw your shoes at the ogre and make a run for the fountain", "Meekly tell the ogre you do not have a gift to give"],
+			dialogText: "You finally reach the mountain peak but find an ogre asleep beside the fountain of youth. You try to tiptoe over but the ogre awakens and demands you give him a gift or be eaten. What do you do?",
+			choices: ["Realize ogres just want to fit in and give him your shades", "Throw your shoes at the ogre and make a run for the fountain", "Meekly tell the ogre you do not have a gift to give"],
 			results: ["The ogre tearfully accepts your gesture and vows to always come to your aid!", "While the ogre tries to figure out what to do with the shoes, you narrowly escape!", "The ogre advances to eat you but is overcome with hiccups, allowing you to make a run for the fountain!"],
 			resultsImgs: ["https://media.giphy.com/media/3fmRTfVIKMRiM/giphy.gif", "https://media.giphy.com/media/7gwjvHLaxFFYc/giphy.gif", "https://media.giphy.com/media/8r9efp842pMAM/giphy.gif"]
 		}, // end of scene # 2
