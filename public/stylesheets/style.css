@@ -30,3 +30,13 @@ header, main, footer {
   }
 }
 
+#chat_form {
+  padding-left: 10px;
+}
+
+#slide-out li {
+  padding-left: 10px;
+  height: 80%;
+  overflow: hidden;
+  overflow-y: auto;
+}
