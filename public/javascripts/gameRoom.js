@@ -151,3 +151,14 @@ function userLeftToast() {
 function waitingForUserToast() {
     Materialize.toast("Waiting for other player's turn", 3000);
 }
+
+// function to update leaderboard
+// pass in playername from session storage
+// pass in either 'W' or 'L' to represent win or loss
+function updateLeaderBoard(playername, WorL) {
+    if (WorL == 'W' || WorL == 'L') {
+        $.post('/api/updateBoard', {playername: playername, result: WorL});
+    } else {
+        console.log('neither W nor L sent to updateLeaderBoard function');
+    }
+}
