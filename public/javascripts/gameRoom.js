@@ -4,7 +4,13 @@ $(document).ready(function () {
     });
 
     // get the user name from session storage
-    var sessionUserName = sessionStorage.sessionUserName;
+    var sessionUserName;
+    if (sessionStorage.sessionUserName === undefined) {
+        sessionUserName = "voldermort";
+    } else {
+        sessionUserName = sessionStorage.sessionUserName;
+    }
+
     //gram gameroom number from url on load
     var roomID = Number(window.location.pathname.match(/\/gameroom\/(\d+)$/)[1]);
 
@@ -93,6 +99,12 @@ $(document).ready(function () {
         console.log(data);
 
         $('.player-choices').hide();
+
+        // update the leaderboard - send it player name and whether they won or lost
+        // playername will come from sessionstorage
+        // if win:  updateLeaderBoard(sessionUserName, 'W');
+        // if lose: updateLeaderBoard(sessionUserName, 'L');
+        updateLeaderBoard(sessionUserName, 'W');
 
         setTimeout(displayGameOver, 5500);
     });
