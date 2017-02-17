@@ -67,7 +67,7 @@ var gameRouter = function (io) {
                 setUpUserSocket(socket, data);
 
                 //sends to users once connected to page
-                socket.emit('joined game', { player: socket.userName });
+                io.to(socket.room).emit('joined game', { player: socket.userName });
 
                 addFirstUser(data);
 
@@ -86,7 +86,7 @@ var gameRouter = function (io) {
                 setUpUserSocket(socket, data);
 
                 //sends to users once connected to page
-                socket.emit('joined game', { player: socket.userName });
+                io.to(socket.room).emit('joined game', { player: socket.userName });
 
                 addSecondUser(socket);
 
