@@ -98,5 +98,5 @@ function userLeftToast(leavingUser) {
 
 // function to call when waiting for a user
 function waitingForUserToast() {
-    Materialize.toast('Waiting for another player to join', 3000);
+    Materialize.toast("Waiting for other player's turn", 3000);
 }
