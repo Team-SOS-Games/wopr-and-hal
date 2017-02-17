@@ -85,3 +85,18 @@ $(document).ready(function () {
         }
     });
 });
+
+// function to call when a user joins
+function userJoinedToast(joiningUser) {
+    Materialize.toast(joiningUser + 'has entered', 3000);
+}
+
+// function to call when a user leaves
+function userLeftToast(leavingUser) {
+    Materialize.toast(leavingUser + 'has left the game', 3000);
+}
+
+// function to call when waiting for a user
+function waitingForUserToast() {
+    Materialize.toast("Waiting for other player's turn", 3000);
+}
