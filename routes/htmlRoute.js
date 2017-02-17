@@ -15,6 +15,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'WOPR and HAL' });
 });
 
+router.get('/joingame', function(req, res, next) {
+	res.render('joingame', {title: 'Join a Game'});
+});
+
 router.get('/lobby', function(req, res, next) {
   res.render('lobby', {title: 'Game lobby'});
 });
