@@ -62,7 +62,7 @@ $(document).ready(function () {
     //renders user posts from server to chat panel
     chatIO.on('new post', function (data) {
         console.log(data);
-        $chat.prepend('<li><h5>' + '<b><mark>' + data.userName + ':</mark> ' + '</b>' + data.msg + '</h5></li>');
+        $chat.prepend('<li><h6>' + '<b><mark>' + data.userName + ':</mark> ' + '</b>' + data.msg + '</h6></li>');
     });
 
 });//end of ready
