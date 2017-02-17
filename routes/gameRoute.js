@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var gameData = require('../gameObjects/RPS_game_object');
+var gameData = require('../gameObjects/FULL_game_object');
 
 //list of all games currently active on server
 var gamesList = [];
