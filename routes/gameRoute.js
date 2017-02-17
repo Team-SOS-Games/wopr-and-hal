@@ -61,17 +61,15 @@ var gameRouter = function (io) {
                 console.log(data.userName);
                 if (data.userName === undefined) {
                     data.userName = "voldermort1";
-                    console.log(data.userName);
-
                 }
 
                 //setup room and name data for current socket
                 setUpUserSocket(socket, data);
 
-                addFirstUser(data);
+                //sends to users once connected to page
+                socket.emit('joined game', { player: socket.userName });
 
-                //TODO emit to user waiting for other player
-                socket.emit('waiting', { waiting: "waiting for player 2 to join" });
+                addFirstUser(data);
 
                 console.log(gamesList["room: " + roomID].numOfUsers);
 
@@ -86,6 +84,9 @@ var gameRouter = function (io) {
                 }
 
                 setUpUserSocket(socket, data);
+
+                //sends to users once connected to page
+                socket.emit('joined game', { player: socket.userName });
 
                 addSecondUser(socket);
 
@@ -131,29 +132,31 @@ var gameRouter = function (io) {
                  */
                 var winningChoice = getWinningChoice(user1, user2);
 
+                var results = getResults(winningChoice, currentGame);
+
+                io.to(socket.room).emit("results", results);
                 //get results of choice and update game scene
                 var nextScene = getNextScene(currentGame);
 
                 //reset user choices after current game state
                 user1.choice = null;
                 user2.choice = null;
-
+                
                 if (nextScene !== "gameover") {
                     //update users scenery
                     io.to(socket.room).emit('next', nextScene);
                 } else {
-                    //tell show final result
+                    //show final result
                     io.to(socket.room).emit('gameover', {gameover: true});
                 }
             }
 
-            console.log(data);
-            io.to(socket.room).emit('choice', { choice: data });
+            socket.emit('choice', { choice: data });
         });
 
         //listens for disconnect of user
         socket.on('disconnect', function () {
-            var message = "player has left the game";
+            var message = socket.userName + " has left the game";
             console.log(message);
 
             //check if room number exists in gamelists
@@ -256,19 +259,34 @@ function getWinningChoice(user1, user2) {
     return theWinner;
 }
 
-function getNextScene(currentGame) {
+function getResults(winningChoice, currentGame) {
 
-    if (currentGame.scene + 1 < gameData.scenes.length) {
+    var results = {
+        resultText: gameData.scenes[currentGame.scene].results[winningChoice.choice],
+        resultImg: gameData.scenes[currentGame.scene].resultsImgs[winningChoice.choice]
+    };
+
+    console.log(gameData.scenes[currentGame.scene].results[winningChoice.choice]);
+    console.log(gameData.scenes[currentGame.scene].resultsImgs[winningChoice.choice]);
+    
+    return results;
+}
+
+function getNextScene(currentGame) {
+    var maxScenes = 5;
+    var nextScene;
+
+    if (currentGame.scene < maxScenes) {
 
         currentGame.scene++;
+        nextScene = gameData.scenes[currentGame.scene];
 
     } else {
         nextScene = "gameover";
     }
 
-    var nextScene = gameData.scenes[currentGame.scene];
 
-    console.log(gameData);
+    //console.log(gameData);
 
     return nextScene;
 }
