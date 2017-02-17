@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $('.modal').modal({
+        dismissible: false,
+    });
 
     // get the user name from session storage
     var sessionUserName = sessionStorage.sessionUserName;
@@ -11,12 +14,16 @@ $(document).ready(function () {
     var gameIO = io.connect('/game');
 
     //cache game panel elements for multiple use
-    var $bg  = $('#scene_bg');
+    var $bg     = $('#scene_bg');
     var $dialog = $('#dialog');
     //cache choice buttons for multiple use
     var $choice0 = $('#0');
     var $choice1 = $('#1');
     var $choice2 = $('#2');
+    //cache modal elements
+    var $resultImg = $('#resultsimage');
+    var $resultTxt = $('#resultsdialog');
+    var $resultBtn = $('#closeresultsmodal');
 
     /**
      * Socket.io custom "on" event listener
@@ -27,7 +34,6 @@ $(document).ready(function () {
      * @param(emit(Int: roomID)) sends to add user to room
     */
     gameIO.on('load', function (data) {
-        console.log(data);
         gameIO.emit('load', { roomID: roomID, userName: sessionUserName });
     });
 
@@ -59,7 +65,15 @@ $(document).ready(function () {
 
     //listens for return data after choice events are fired
     gameIO.on('choice', function (data) {
+        waitingForUserToast();
         console.log(data);
+    });
+
+    gameIO.on('results', function(data) {
+        $resultImg.attr('src', data.resultImg);
+        $resultTxt.text(data.resultText);
+
+        $('#resultsmodal').modal('open');
     });
 
     gameIO.on('next', function (data) {
@@ -82,22 +96,33 @@ $(document).ready(function () {
         }
     });
 
+    gameIO.on('joined game', function(data) {
+        userJoinedToast(data.player);
+    });
+
     gameIO.on('player left', function (data) {
         console.log(data.msg);
+
+        userLeftToast();
         if (data.redirect) {
             setTimeout(function () { window.location.href = data.url; }, 3000);
         }
+    });
+
+    $resultBtn.on('click', function() {
+        $('#resultmodal').modal('close');
     });
 });
 
 // function to call when a user joins
 function userJoinedToast(joiningUser) {
-    Materialize.toast(joiningUser + 'has entered', 3000);
+    Materialize.toast(joiningUser + ' has entered', 5000);
 }
 
 // function to call when a user leaves
-function userLeftToast(leavingUser) {
-    Materialize.toast(leavingUser + 'has left the game', 3000);
+function userLeftToast() {
+    Materialize.toast('Other player has left the game', 3000);
+    Materialize.toast('Leaving back to lobby', 3000);
 }
 
 // function to call when waiting for a user
