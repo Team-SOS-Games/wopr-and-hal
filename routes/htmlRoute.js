@@ -4,7 +4,7 @@ const router = express.Router();
 const db = require('../models/index.js');
 
 // import the game_object that holds scenes and data
-const game_object = require('../game_object.js')
+const game_object = require('../gameObjects/FULL_game_object')
 
 /**
  * This router handles the websites HTML routing, redirecting

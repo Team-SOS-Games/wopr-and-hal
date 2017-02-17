@@ -65,7 +65,7 @@ $(document).ready(function () {
     gameIO.on('next', function (data) {
         console.log(data);
         
-        $bg.css("background-image", data.bgImg);
+        $bg.css("background-image", "url(" + data.bgImg + ")");
         $dialog.text(data.dialogText);
         $choice0.text(data.choices[0]);
         $choice1.text(data.choices[1]);
