@@ -14,7 +14,7 @@ $(document).ready(function () {
     var gameIO = io.connect('/game');
 
     //cache game panel elements for multiple use
-    var $bg     = $('#scene_bg');
+    var $bg = $('#scene_bg');
     var $dialog = $('#dialog');
     //cache choice buttons for multiple use
     var $choice0 = $('#0');
@@ -24,6 +24,9 @@ $(document).ready(function () {
     var $resultImg = $('#resultsimage');
     var $resultTxt = $('#resultsdialog');
     var $resultBtn = $('#closeresultsmodal');
+
+    //store for end of the game
+    var gameover = false;
 
     /**
      * Socket.io custom "on" event listener
@@ -69,7 +72,7 @@ $(document).ready(function () {
         console.log(data);
     });
 
-    gameIO.on('results', function(data) {
+    gameIO.on('results', function (data) {
         $resultImg.attr('src', data.resultImg);
         $resultTxt.text(data.resultText);
 
@@ -78,7 +81,7 @@ $(document).ready(function () {
 
     gameIO.on('next', function (data) {
         console.log(data);
-        
+
         $bg.css("background-image", "url(" + data.bgImg + ")");
         $dialog.text(data.dialogText);
         $choice0.text(data.choices[0]);
@@ -88,6 +91,10 @@ $(document).ready(function () {
 
     gameIO.on('gameover', function (data) {
         console.log(data);
+
+        $('.player-choices').hide();
+
+        setTimeout(displayGameOver, 4000);
     });
 
     gameIO.on('redirect', function (data) {
@@ -96,7 +103,7 @@ $(document).ready(function () {
         }
     });
 
-    gameIO.on('joined game', function(data) {
+    gameIO.on('joined game', function (data) {
         userJoinedToast(data.player);
     });
 
@@ -109,10 +116,25 @@ $(document).ready(function () {
         }
     });
 
-    $resultBtn.on('click', function() {
-        $('#resultmodal').modal('close');
+    $resultBtn.on('click', function () {
+        if (gameover) {
+            window.location.href = "/joingame";
+        } else {
+            $('#resultmodal').modal('close');
+        }
     });
+
+    function displayGameOver() {
+        gameover = true;
+
+        $resultImg.attr('src', 'https://media.giphy.com/media/U8bDgsXcnIEFy/giphy.gif');
+        $resultTxt.text("Thank you for joining us in this adventure");
+
+        $('#resultsmodal').modal('open');
+    }
 });
+
+
 
 // function to call when a user joins
 function userJoinedToast(joiningUser) {
