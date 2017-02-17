@@ -138,11 +138,15 @@ var gameRouter = function (io) {
                 user1.choice = null;
                 user2.choice = null;
 
+                console.log("next scene is");
+                
+                console.log(nextScene);
+                
                 if (nextScene !== "gameover") {
                     //update users scenery
                     io.to(socket.room).emit('next', nextScene);
                 } else {
-                    //tell show final result
+                    //show final result
                     io.to(socket.room).emit('gameover', {gameover: true});
                 }
             }
@@ -257,18 +261,20 @@ function getWinningChoice(user1, user2) {
 }
 
 function getNextScene(currentGame) {
+    var maxScenes = 5;
+    var nextScene;
 
-    if (currentGame.scene + 1 < gameData.scenes.length) {
+    if (currentGame.scene < maxScenes) {
 
         currentGame.scene++;
+        nextScene = gameData.scenes[currentGame.scene];
 
     } else {
         nextScene = "gameover";
     }
 
-    var nextScene = gameData.scenes[currentGame.scene];
 
-    console.log(gameData);
+    //console.log(gameData);
 
     return nextScene;
 }

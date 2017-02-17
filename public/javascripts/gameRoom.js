@@ -72,6 +72,10 @@ $(document).ready(function () {
         $choice2.text(data.choices[2]);
     });
 
+    gameIO.on('gameover', function (data) {
+        console.log(data);
+    });
+
     gameIO.on('redirect', function (data) {
         if (data.redirect) {
             window.location.href = data.url;
