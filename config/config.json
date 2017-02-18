@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": "8725183sd",
+    "password": "",
     "database": "halwopr",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "8725183sd",
+    "password": "",
     "database": "halwopr",
     "host": "127.0.0.1",
     "dialect": "mysql"
