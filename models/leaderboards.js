@@ -16,14 +16,17 @@ module.exports = function(sequelize, DataTypes) {
 
     wins:{
       type: DataTypes.INTEGER,
+      defaultValue: 0
     },
 
     losses:{
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 0
     },
 
     gamesplayed: {
       type: DataTypes.INTEGER,
+      defaultValue: 0
     }
 
   } , {
@@ -39,6 +42,10 @@ module.exports = function(sequelize, DataTypes) {
 
   leaderboards.sync({
     logging: console.logging
+  }).then(function() {
+    leaderboards.findOrCreate({
+      where: { userName: 'voldemort' }
+    })
   });
 
   return leaderboards;

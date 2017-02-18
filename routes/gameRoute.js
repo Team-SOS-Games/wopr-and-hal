@@ -55,7 +55,6 @@ var gameRouter = function (io) {
             //if room doesn't exist create and add it to list
             if (typeof (gamesList["room: " + roomID]) == 'undefined') {
 
-                console.log(gamesList.length === 0 || gamesList["room: " + roomID] == 'undefined');
                 console.log("setting up user for first time in room");
 
                 console.log(data.userName);
@@ -141,13 +140,21 @@ var gameRouter = function (io) {
                 //reset user choices after current game state
                 user1.choice = null;
                 user2.choice = null;
-                
+
                 //update users scenery
                 io.to(socket.room).emit('next', nextScene);
 
+                //Game Over
                 if (nextScene == "gameover") {
+                    var winOrlose;
+
+                    if (winningChoice.choice == 2) {
+                        winOrlose = "W";
+                    } else {
+                        winOrlose = "L";
+                    }
                     //show final result
-                    io.to(socket.room).emit('gameover', {gameover: true});
+                    io.to(socket.room).emit('gameover', { winOrlose: winOrlose });
                 }
             }
 
@@ -169,7 +176,7 @@ var gameRouter = function (io) {
 
                     delete gamesList[key];
 
-                    io.to(socket.room).emit('player left', { msg: message, redirect: true, url: "/lobby" });
+                    io.to(socket.room).emit('player left', { msg: message, redirect: true, url: "/joingame" });
                 }
             }
 
@@ -262,13 +269,14 @@ function getWinningChoice(user1, user2) {
 function getResults(winningChoice, currentGame) {
 
     var results = {
+        resultUser: winningChoice.userName,
         resultText: gameData.scenes[currentGame.scene].results[winningChoice.choice],
         resultImg: gameData.scenes[currentGame.scene].resultsImgs[winningChoice.choice]
     };
 
     console.log(gameData.scenes[currentGame.scene].results[winningChoice.choice]);
     console.log(gameData.scenes[currentGame.scene].resultsImgs[winningChoice.choice]);
-    
+
     return results;
 }
 
