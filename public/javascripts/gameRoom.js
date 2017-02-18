@@ -27,6 +27,7 @@ $(document).ready(function () {
     var $choice1 = $('#1');
     var $choice2 = $('#2');
     //cache modal elements
+    var $winner    = $('#winner');
     var $resultImg = $('#resultsimage');
     var $resultTxt = $('#resultsdialog');
     var $resultBtn = $('#closeresultsmodal');
@@ -79,6 +80,7 @@ $(document).ready(function () {
     });
 
     gameIO.on('results', function (data) {
+        $winner.text(data.resultUser);
         $resultImg.attr('src', data.resultImg);
         $resultTxt.text(data.resultText);
 
@@ -106,7 +108,7 @@ $(document).ready(function () {
         // if lose: updateLeaderBoard(sessionUserName, 'L');
         updateLeaderBoard(sessionUserName, data.winOrlose);
 
-        setTimeout(displayGameOver, 5500);
+        setTimeout(displayGameOver, 8000);
     });
 
     gameIO.on('redirect', function (data) {
@@ -139,6 +141,7 @@ $(document).ready(function () {
     function displayGameOver() {
         gameover = true;
 
+        $winner.text('THE END');
         $resultImg.attr('src', 'https://media.giphy.com/media/U8bDgsXcnIEFy/giphy.gif');
         $resultTxt.text("Thank you for joining us in this adventure");
 
@@ -161,13 +164,27 @@ function userLeftToast() {
 
 // function to call when waiting for a user
 function waitingForUserToast() {
-    Materialize.toast("Waiting for other player's turn", 3000);
+    Materialize.toast("Waiting for other player's turn", 2000);
+}
+
+function loserToast() {
+    Materialize.toast('You "Lost" it was your partners fault', 5000);
+}
+function winnerToast() {
+    Materialize.toast('You "Won" now thats teamwork I think?', 5000);
 }
 
 // function to update leaderboard
 // pass in playername from session storage
 // pass in either 'W' or 'L' to represent win or loss
 function updateLeaderBoard(playername, WorL) {
+
+    if (WorL == 'W') {
+        winnerToast();
+    } else {
+        loserToast();
+    }
+
     if (WorL == 'W' || WorL == 'L') {
         $.post('/api/updateBoard', { playername: playername, result: WorL });
     } else {

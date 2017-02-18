@@ -176,7 +176,7 @@ var gameRouter = function (io) {
 
                     delete gamesList[key];
 
-                    io.to(socket.room).emit('player left', { msg: message, redirect: true, url: "/lobby" });
+                    io.to(socket.room).emit('player left', { msg: message, redirect: true, url: "/joingame" });
                 }
             }
 
@@ -269,6 +269,7 @@ function getWinningChoice(user1, user2) {
 function getResults(winningChoice, currentGame) {
 
     var results = {
+        resultUser: winningChoice.userName,
         resultText: gameData.scenes[currentGame.scene].results[winningChoice.choice],
         resultImg: gameData.scenes[currentGame.scene].resultsImgs[winningChoice.choice]
     };
