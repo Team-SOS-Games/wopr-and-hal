@@ -16,14 +16,17 @@ module.exports = function(sequelize, DataTypes) {
 
     wins:{
       type: DataTypes.INTEGER,
+      defaultValue: 0
     },
 
     losses:{
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 0
     },
 
     gamesplayed: {
       type: DataTypes.INTEGER,
+      defaultValue: 0
     }
 
   } , {
