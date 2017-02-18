@@ -80,7 +80,7 @@ $(document).ready(function () {
     });
 
     gameIO.on('results', function (data) {
-        $winner.text(data.userName);
+        $winner.text(data.resultUser);
         $resultImg.attr('src', data.resultImg);
         $resultTxt.text(data.resultText);
 
@@ -108,7 +108,7 @@ $(document).ready(function () {
         // if lose: updateLeaderBoard(sessionUserName, 'L');
         updateLeaderBoard(sessionUserName, data.winOrlose);
 
-        setTimeout(displayGameOver, 5500);
+        setTimeout(displayGameOver, 8000);
     });
 
     gameIO.on('redirect', function (data) {
