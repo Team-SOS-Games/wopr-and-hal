@@ -58,8 +58,8 @@ var gameRouter = function (io) {
                 console.log("setting up user for first time in room");
 
                 console.log(data.userName);
-                if (data.userName === "voldarmort") {
-                    data.userName = "voldarmort1";
+                if (data.userName === "voldemort") {
+                    data.userName = "voldemort1";
                 }
 
                 //setup room and name data for current socket
@@ -78,8 +78,8 @@ var gameRouter = function (io) {
 
                 console.log("setting up user two for the first time");
 
-                if (data.userName === "voldarmort") {
-                    data.userName = "voldarmort2";
+                if (data.userName === "voldemort") {
+                    data.userName = "voldemort2";
                 }
 
                 setUpUserSocket(socket, data);

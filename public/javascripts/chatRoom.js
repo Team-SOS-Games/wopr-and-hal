@@ -3,7 +3,7 @@ $(document).ready(function () {
     // get the user name from session storage
     var sessionUserName;
     if (sessionStorage.sessionUserName === undefined) {
-        sessionUserName = "voldermort";
+        sessionUserName = "voldemort";
     } else {
         sessionUserName = sessionStorage.sessionUserName;
     }
