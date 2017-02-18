@@ -1,16 +1,18 @@
+<div class="parallax-container" id="leaderboardsprllx">
+
 {{>chatpanel}}
 
 {{>gameprogress}}
 
 <!-- first the game panel -->
-<div id="scene_bg" class="row game_panel" style="background-image: url('{{scene.bgImg}}')">
+<div id="scene_bg" class="row game_panel z-depth-5" style="background-image: url('{{scene.bgImg}}')">
 
     <!-- <div class="col m12"> -->
-    <div class="col s12 m6">
+    <div class="col s12 m6" id="dialogwrapper">
 
-		    <!-- make a card that displays the scene dialog text -->
-		    <!-- <div class="card grey darken-1"> -->
-            <div class="card-content white-text" id="dialogdiv">
+            <!-- make a card that displays the scene dialog text -->
+            <!-- <div class="card grey darken-1"> -->
+            <div class="card-content white-text z-depth-5" id="dialogdiv">
               <span id="dialog" class="card-title"><h6 id="dialogtext">{{scene.dialogText}}</h6></span>
             </div>
         <!-- </div> -->
@@ -22,18 +24,21 @@
 <!-- second comes the choice panel -->
 <div class="row choice_panel">
 
-	  <!-- display buttons for the choices for this scene -->
-    <div class="col m12 player-choices"> 
+      <!-- display buttons for the choices for this scene -->
+    <div class="col m12 player-choices" id="grplayerchoices">
       {{#each scene.choices}}
-  	    <button id="{{@index}}" class="waves-effect waves-light btn-large blue-grey">{{this}}</button><br><br>
-  	  {{/each}}
+          <button id="{{@index}}" class="waves-effect waves-light btn-large pink darken-3">{{this}}</button><br><br>
+        {{/each}}
     </div>
 
 </div>
 
+    <div class="parallax"><img src="/images/landingPage.jpg"></div>
+</div>
+
 <footer class="page-footer" id="pagefooter">
     <div class="footer-copyright">
-        <div class="container">
+        <div class="container" id="gameroompagefooter">
             © 2017 Copyright
             <a class="grey-text text-lighten-4 right" href="https://github.com/Team-SOS-Games/wopr-and-hal.git">Wopr &amp; Hal 
             <img id="gitlogo" class="right" src="/images/Github.png" style="height: 2em; width: 2.5em;" alt="github logo">
