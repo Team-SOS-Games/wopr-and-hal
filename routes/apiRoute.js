@@ -35,7 +35,7 @@ router.post('/adduser', function (req, res, next) {
 	}).catch(function (err) {
 
 		res.redirect('/lobby');
-		console.error(err);
+		console.error(  err   );
 	});
 });
 
