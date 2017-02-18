@@ -4,7 +4,13 @@ $(document).ready(function () {
     });
 
     // get the user name from session storage
-    var sessionUserName = sessionStorage.sessionUserName;
+    var sessionUserName;
+    if (sessionStorage.sessionUserName === undefined) {
+        sessionUserName = "voldermort";
+    } else {
+        sessionUserName = sessionStorage.sessionUserName;
+    }
+
     //gram gameroom number from url on load
     var roomID = Number(window.location.pathname.match(/\/gameroom\/(\d+)$/)[1]);
 
@@ -94,6 +100,12 @@ $(document).ready(function () {
 
         $('.player-choices').hide();
 
+        // update the leaderboard - send it player name and whether they won or lost
+        // playername will come from sessionstorage
+        // if win:  updateLeaderBoard(sessionUserName, 'W');
+        // if lose: updateLeaderBoard(sessionUserName, 'L');
+        updateLeaderBoard(sessionUserName, 'W');
+
         setTimeout(displayGameOver, 5500);
     });
 
@@ -150,4 +162,15 @@ function userLeftToast() {
 // function to call when waiting for a user
 function waitingForUserToast() {
     Materialize.toast("Waiting for other player's turn", 3000);
+}
+
+// function to update leaderboard
+// pass in playername from session storage
+// pass in either 'W' or 'L' to represent win or loss
+function updateLeaderBoard(playername, WorL) {
+    if (WorL == 'W' || WorL == 'L') {
+        $.post('/api/updateBoard', {playername: playername, result: WorL});
+    } else {
+        console.log('neither W nor L sent to updateLeaderBoard function');
+    }
 }
