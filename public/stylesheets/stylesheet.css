@@ -84,13 +84,12 @@ body {
     border-radius: 15px
 }
 
-#grplayerchoices {
+/*#grplayerchoices {
     display: flex;
     margin-left: 160px;
     margin-top: 65px;
-}
+}*/
 #grplayerchoices button{
-    margin-left: 20px;
     background-color: #2e0a24;
 }
 
