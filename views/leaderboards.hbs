@@ -1,27 +1,46 @@
+<div class="parallax-container" id="leaderboardsprllx">
+	<a href="/lobby"><button type="submit" class="btn btn-primary" id="return-lobby">Back to Lobby!</button></a>
+    <div class="valign-wrapper">
+        <div class="container center">
+            <h1 class="center" id="maintitleleaderboard">Leaderboards</h1>
 
-<a href="/lobby"><button type="submit" class="btn btn-primary" id="return-lobby">Back to Lobby!</button></a>
+            <table class="striped centered responsive-table" id="leaderboardstable">
+                <thead>
+                    <tr>
+                        <th data-field="id">Name</th>
+                        <th data-field="name">Wins</th>
+                        <th data-field="name">Losses</th>
+                        <th data-field="name">Games Played</th>
+                    </tr>
+                </thead>
 
-<h1 class="center-align">Leaderboards</h1>
+                <tbody>
+                {{#each leaderboards}}
+                    <tr>
+                        <td>{{this.userName}}</td>			
+                        <td>{{this.wins}}</td>
+                        <td>{{this.losses}}</td>
+                        <td>{{this.gamesplayed}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
 
-<table class="striped centered responsive-table">
-	<thead>
-		<tr>
-			<th data-field="id">Name</th>
-			<th data-field="name">Wins</th>
-			<th data-field="name">Losses</th>
-			<th data-field="name">Games Played</th>
-		</tr>
-	</thead>
+            </table>
 
-	<tbody>
-	{{#each leaderboards}}
-		<tr>
-			<td>{{this.userName}}</td>			
-			<td>{{this.wins}}</td>
-			<td>{{this.losses}}</td>
-			<td>{{this.gamesplayed}}</td>
-		</tr>
-	{{/each}}
-	</tbody>
+        </div>
+    </div>
+    <div class="parallax"><img src="/images/landingPage.jpg"></div>
+</div>
 
-</table>
+<footer class="page-footer" id="pagefooter">
+    <div class="container">
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2017 Copyright
+            <a class="grey-text text-lighten-4 right" href="https://github.com/Team-SOS-Games/wopr-and-hal.git">Wopr &amp; Hal
+            <img id="gitlogo" class="right" src="/images/Github.png" style="height: 2em; width: 2.5em;" alt="github logo">
+            </a>
+        </div>
+    </div>
+</footer>

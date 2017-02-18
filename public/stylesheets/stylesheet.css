@@ -57,6 +57,55 @@ body {
 
 /*End lobby css*/
 
+/*leadeboard css*/
+#return-lobby{
+    background-color: #2e0a24;
+}
+
+#maintitleleaderboard{
+    font-family: 'Homemade Apple', cursive;
+}
+#leaderboardsprllx{
+    height: 660px;
+}
+/*end leaderboard css*/
+
+/*gameroom css*/
+#scene_bg{
+    width: 720px;
+    height: 265px;
+    border-radius: 50px;
+    margin-left: 450px;
+}
+
+#dialogwrapper {
+    margin-top: 183px;
+    margin-left: 50px;
+    border-radius: 15px
+}
+
+#grplayerchoices {
+    display: flex;
+    margin-left: 160px;
+    margin-top: 65px;
+}
+#grplayerchoices button{
+    margin-left: 20px;
+    background-color: #2e0a24;
+}
+
+#gameroompagefooter{
+    margin-left:20px;
+}
+/*end gameroom css*/
+
+/*joinroom css*/
+#jrplaybutton{
+        margin-top: 50px;
+    background-color: #2e0a24;
+}
+
+/*end joinroom css*/
 
 /*gameframe css*/
 
