@@ -21,8 +21,13 @@ router.post('/adduser', function (req, res, next) {
 	console.log("password: ", req.body.password);
 	db.user.findOrCreate({ where: { userName: req.body.userName, password: req.body.password } }).then(function () {
 
-		//add this after /createroom is made
-		res.redirect('/createroom');
+		db.leaderboards.findOrCreate({ where: {userName: req.body.userName}  }).then(function() {
+
+			// redirect only after also having added or verified they exist in leaderboards table
+			//add this after /createroom is made
+			res.redirect('/createroom');
+
+		});
 
 	}).catch(function (err) {
 
