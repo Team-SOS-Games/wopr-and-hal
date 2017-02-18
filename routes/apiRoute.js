@@ -19,8 +19,11 @@ router.post('/', function (req, res, next) {
 router.post('/adduser', function (req, res, next) {
 	console.log("username: ", req.body.userName);
 	console.log("password: ", req.body.password);
+
+	// create a new user in user table with login/pass unless account already exists in user table
 	db.user.findOrCreate({ where: { userName: req.body.userName, password: req.body.password } }).then(function () {
 
+		// next, add user to leaderboards table too if account not already in leaderboards table
 		db.leaderboards.findOrCreate({ where: {userName: req.body.userName}  }).then(function() {
 
 			// redirect only after also having added or verified they exist in leaderboards table
