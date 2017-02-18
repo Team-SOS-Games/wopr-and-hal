@@ -4,7 +4,9 @@
  * and retreiving data from Server back to the user
  */
 $(document).ready(function () {
-    
+
+    $('.parallax').parallax();
+
     // Initialize collapse sidebar
     $(".button-collapse").sideNav({
         menuWidth: 300,
@@ -12,7 +14,7 @@ $(document).ready(function () {
     });
 
     // listen for onclick on lobby submit button
-    $("#text-enter-button").on('click', function() {
+    $(".text-enter-button").on('click', function() {
     	// when clicked, grab the text the user entered for username
     	var localSavedName = $("#enter_text").val().trim();
     	// save the user name to session storage under key name of sessionUserName
