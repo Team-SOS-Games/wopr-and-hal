@@ -104,7 +104,7 @@ $(document).ready(function () {
         // playername will come from sessionstorage
         // if win:  updateLeaderBoard(sessionUserName, 'W');
         // if lose: updateLeaderBoard(sessionUserName, 'L');
-        updateLeaderBoard(sessionUserName, 'W');
+        updateLeaderBoard(sessionUserName, data.winOrlose);
 
         setTimeout(displayGameOver, 5500);
     });
@@ -169,7 +169,7 @@ function waitingForUserToast() {
 // pass in either 'W' or 'L' to represent win or loss
 function updateLeaderBoard(playername, WorL) {
     if (WorL == 'W' || WorL == 'L') {
-        $.post('/api/updateBoard', {playername: playername, result: WorL});
+        $.post('/api/updateBoard', { playername: playername, result: WorL });
     } else {
         console.log('neither W nor L sent to updateLeaderBoard function');
     }

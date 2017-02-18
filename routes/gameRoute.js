@@ -55,7 +55,6 @@ var gameRouter = function (io) {
             //if room doesn't exist create and add it to list
             if (typeof (gamesList["room: " + roomID]) == 'undefined') {
 
-                console.log(gamesList.length === 0 || gamesList["room: " + roomID] == 'undefined');
                 console.log("setting up user for first time in room");
 
                 console.log(data.userName);
@@ -141,13 +140,21 @@ var gameRouter = function (io) {
                 //reset user choices after current game state
                 user1.choice = null;
                 user2.choice = null;
-                
+
                 //update users scenery
                 io.to(socket.room).emit('next', nextScene);
 
+                //Game Over
                 if (nextScene == "gameover") {
+                    var winOrlose;
+
+                    if (winningChoice.choice == 2) {
+                        winOrlose = "W";
+                    } else {
+                        winOrlose = "L";
+                    }
                     //show final result
-                    io.to(socket.room).emit('gameover', {gameover: true});
+                    io.to(socket.room).emit('gameover', { winOrlose: winOrlose });
                 }
             }
 
@@ -268,7 +275,7 @@ function getResults(winningChoice, currentGame) {
 
     console.log(gameData.scenes[currentGame.scene].results[winningChoice.choice]);
     console.log(gameData.scenes[currentGame.scene].resultsImgs[winningChoice.choice]);
-    
+
     return results;
 }
 
