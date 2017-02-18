@@ -42,6 +42,10 @@ module.exports = function(sequelize, DataTypes) {
 
   leaderboards.sync({
     logging: console.logging
+  }).then(function() {
+    leaderboards.findOrCreate({
+      where: { userName: 'voldemort' }
+    })
   });
 
   return leaderboards;
