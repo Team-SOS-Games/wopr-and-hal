@@ -80,7 +80,7 @@ $(document).ready(function () {
     });
 
     gameIO.on('results', function (data) {
-        $winner.text(data.resultUser);
+        $winner.text(data.resultUser + " has lead this group to this decision");
         $resultImg.attr('src', data.resultImg);
         $resultTxt.text(data.resultText);
 

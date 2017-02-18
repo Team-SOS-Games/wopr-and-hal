@@ -45,7 +45,7 @@ module.exports = function(sequelize, DataTypes) {
   }).then(function() {
     leaderboards.findOrCreate({
       where: { userName: 'voldemort' }
-    })
+    });
   });
 
   return leaderboards;

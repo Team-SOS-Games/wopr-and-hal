@@ -1,5 +1,5 @@
 -----------------------------------------
-# WOPR and HAL - A Cooperative Async Turn Based RPG
+# WOPR and HAL - A Cooperative Async Turn Based Adventure Game
 
 #### Week 16 / Project 2
 #### UCF Coding Boot Camp - February 2017
