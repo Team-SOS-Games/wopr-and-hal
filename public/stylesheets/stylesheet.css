@@ -48,6 +48,16 @@ body {
 
 /*End lobby css*/
 
+/*leadeboard css*/
+#return-lobby{
+    background-color: #2e0a24;
+}
+
+#maintitleleaderboard{
+    font-family: 'Homemade Apple', cursive;
+}
+/*end leaderboard css*/
+
 
 /*gameframe css*/
 
