@@ -59,7 +59,7 @@ var gameRouter = function (io) {
                 console.log("setting up user for first time in room");
 
                 console.log(data.userName);
-                if (data.userName === undefined) {
+                if (data.userName === "voldermort") {
                     data.userName = "voldermort1";
                 }
 
@@ -79,7 +79,7 @@ var gameRouter = function (io) {
 
                 console.log("setting up user two for the first time");
 
-                if (data.userName === undefined) {
+                if (data.userName === "voldermort") {
                     data.userName = "voldermort2";
                 }
 

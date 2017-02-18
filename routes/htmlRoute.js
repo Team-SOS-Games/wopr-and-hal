@@ -12,15 +12,15 @@ const game_object = require('../gameObjects/FULL_game_object');
  */
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'WOPR and HAL' });
+  res.render('index', { title: 'Adventure Quest' });
 });
 
 router.get('/joingame', function(req, res, next) {
-	res.render('joingame', {title: 'Join a Game'});
+	res.render('joingame', {title: 'Game lobby'});
 });
 
 router.get('/lobby', function(req, res, next) {
-  res.render('lobby', {title: 'Game lobby'});
+  res.render('lobby', {title: 'Login Page'});
 });
 
 router.get('/leaderboards', function(req, res, next) {

@@ -1,0 +1,109 @@
+body {
+    background-color: #2e0a24;
+    font-family: cursive;
+}
+
+#maintitle {
+    font-family: 'Homemade Apple', cursive;
+    margin-top: 70px;
+    margin-left: -10px;
+}
+
+
+/*home page css*/
+
+#home-body {
+    font-family: 'Homemade Apple', cursive;
+    background: linear-gradient(#2e0a24, #540f45);
+}
+
+#gitlogo {
+    padding-left: 5px;
+}
+
+
+/*End home page css*/
+
+
+/*lobby css*/
+
+#maintitlelobby {
+    margin-top: 70px;
+}
+
+#lobbyform {
+    font-family: Verdana, Geneva, sans-serif;
+    color: white;
+}
+
+#lobbybutton {
+    font-family: Verdana, Geneva, sans-serif;
+    background-color: #2e0a24;
+}
+
+#inputlobby {
+    color: white;
+}
+
+
+/*End lobby css*/
+
+
+/*gameframe css*/
+
+#gfparallax-container {
+    height: 720px;
+}
+
+#gameframemainrow {
+    margin-top: 50px;
+}
+
+#gameframeimg {
+    border-radius: 10%;
+}
+
+#gfmidrow {
+    margin-top: 40px;
+}
+
+#gfdropdown {
+    color: #880e4f;
+}
+
+#gftimer {
+    margin-top: 10px;
+}
+
+#gflobbybutton {
+    font-family: Verdana, Geneva, sans-serif;
+    margin-top: 20px;
+}
+
+
+/*End gameframe css*/
+
+#subtitle {
+    margin-left: 80px;
+    margin-top: 45px;
+}
+
+#playbutton {
+    font-family: Verdana, Geneva, sans-serif;
+    background-color: #2e0a24;
+    margin-left: 30px;
+    margin-top: -30px;
+}
+
+.card-image, p, a {
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+#features {
+    margin-top: 40px;
+}
+
+#pagefooter {
+    font-family: Verdana, Geneva, sans-serif;
+    background: linear-gradient(#2e0a24, #540f45);
+}
