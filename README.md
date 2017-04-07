@@ -15,10 +15,10 @@ Presentation Video:
 (Coming soon...)
 
 Project Requirements:
-https://docs.google.com/document/d/1aPM2aVe1gVKyo0Loi2izYe_zRqaONYEcB2RjMVSjR7o
+https://docs.google.com/document/d/1aPM2aVe1gVKyo0Loi2izYe_zRqaONYEcB2RjMVSjR7o/edit?usp=sharing
 
 User Story:
-https://docs.google.com/document/d/1UKyBJb-UfQbBlhZznqvQoJHNIXT5JedmV5UU_XJiVzw
+https://docs.google.com/document/d/1UKyBJb-UfQbBlhZznqvQoJHNIXT5JedmV5UU_XJiVzw/edit?usp=sharing
 
 -----------------------------------------
 
