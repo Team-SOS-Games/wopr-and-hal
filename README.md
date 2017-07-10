@@ -1,5 +1,5 @@
 -----------------------------------------
-# Adventure Quest - A Cooperative Async Turn Based Adventure Game
+# Adventure Quest - A Cooperative Async Turn Based RPG Adventure Game
 
 Week 16 / Project 2
 UCF Coding Boot Camp - February 2017
